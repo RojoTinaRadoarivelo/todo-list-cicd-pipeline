@@ -1,0 +1,38 @@
+name: CD Pipeline
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  cd-angular:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build Angular App
+        run: npm run build:prod
+
+      - name: Deploying to Netlify server
+        uses: nwtgck/actions-netlify@v2
+        with:
+          publish-dir: ./dist/to-do-list-netlify-cicd/browser
+          production-branch: master
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_TODO_SITE_ID: ${{ secrets.NETLIFY_TODO_SITE_ID }}
