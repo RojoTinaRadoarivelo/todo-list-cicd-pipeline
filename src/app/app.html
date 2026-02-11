@@ -151,9 +151,11 @@
   .pill-group .pill:nth-child(6n + 1) {
     --pill-accent: var(--bright-blue);
   }
+
   .pill-group .pill:nth-child(6n + 2) {
     --pill-accent: var(--electric-violet);
   }
+
   .pill-group .pill:nth-child(6n + 3) {
     --pill-accent: var(--french-violet);
   }
@@ -244,7 +246,9 @@
             <stop offset=".526" stop-color="#CC26D5" />
             <stop offset="1" stop-color="#7702FF" />
           </linearGradient>
-          <clipPath id="a"><path fill="#fff" d="M0 0h982v239H0z" /></clipPath>
+          <clipPath id="a">
+            <path fill="#fff" d="M0 0h982v239H0z" />
+          </clipPath>
         </defs>
       </svg>
       <h1>Hello, {{ title }}</h1>
@@ -353,6 +357,7 @@
           </svg>
         </a>
       </div>
+      <p class="bg-testgreen border-4 border-amber-400 p-5">teste</p>
     </div>
   </div>
 </main>
