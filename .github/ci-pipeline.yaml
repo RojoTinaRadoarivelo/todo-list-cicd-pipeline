@@ -2,6 +2,12 @@ name: CI Pipeline
 
 on:
   push:
+    branches:
+      - "feat/**"
+      - "features/**"
+      - "fix/**"
+      - "fixes/**"
+      - "hotfix/**"
 
 jobs:
   ci-angular:
@@ -20,11 +26,22 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
-      - name: Run format check
-        run: npm run format
+      - name: Run format and lint
+        run: |
+          npm run format
+          npm run lint
 
-      - name: Run lint
-        run: npm run lint
+      - name: Auto commit formatted files if any
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add .
+          if ! git diff --cached --quiet; then
+            git commit -m "Auto format and fix according to rules."
+            echo "Commit created."
+          else
+            echo "No changes to commit."
+          fi
 
       - name: Install Commitlint
         run: npm install --save-dev @commitlint/cli
@@ -33,3 +50,16 @@ jobs:
         run: |
           echo "Checking last commit only:"
           git show -s --format=%B HEAD | npx commitlint --config commitlint.config.cjs
+
+      - name: Pull latest changes and push if commit created
+        run: |
+          BRANCH=$(git rev-parse --abbrev-ref HEAD)
+          # Ne push que si le commit auto existe
+          if git log -1 --pretty=%B | grep -q "Auto format and fix according to rules."; then
+            echo "Pulling latest changes for branch $BRANCH"
+            git pull --rebase origin $BRANCH
+            echo "Pushing commit to branch $BRANCH"
+            git push origin $BRANCH
+          else
+            echo "No new commit to push."
+          fi
