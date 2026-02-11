@@ -20,7 +20,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 22
+          node-version: 18
 
       - name: Install dependencies
         run: npm install
@@ -31,7 +31,7 @@ jobs:
       - name: Deploying to Netlify server
         uses: nwtgck/actions-netlify@v2
         with:
-          publish-dir: ./dist/to-do-list-netlify-cicd
+          publish-dir: ./dist/to-do-list-netlify-cicd/browser
           production-branch: master
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
