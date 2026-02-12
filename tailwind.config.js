@@ -1,5 +1,5 @@
 /** @type {import('tailwindcss').Config} */
-import { amber,  transparent,  blue, green, } from "tailwindcss/colors";
+import { amber,  transparent,  blue, green, gray, } from "tailwindcss/colors";
 const defaultTheme = require('tailwindcss/defaultTheme');
 
 module.exports = {
@@ -8,7 +8,6 @@ module.exports = {
   theme: {
     colors: {
       primary: amber[700],
-      testgreen:green[500],
       amber:{
         50:amber[50],
         100:amber[100],
@@ -29,9 +28,9 @@ module.exports = {
         '700':blue[700],
         '900':blue[900]
       },
-      gray: {
-        '50': "#aea59b",
-        '100': "#988d81",
+      gray: {        
+        '50': gray[50],
+        '100': gray[100],
         '400': "#70665c",
         '500': "#5e564d",
         '900': "#413b34",
