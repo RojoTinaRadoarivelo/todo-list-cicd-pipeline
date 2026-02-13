@@ -1,1 +1,10 @@
-<p>add-task works!</p>
+<form (ngSubmit)="add()" class="flex space-x-2 mt-2">
+  <input
+    type="text"
+    [(ngModel)]="title"
+    name="title"
+    placeholder="Enter task..."
+    class="border p-2 w-full rounded"
+  />
+  <button type="submit" class="bg-blue-500 px-4 rounded">Add</button>
+</form>

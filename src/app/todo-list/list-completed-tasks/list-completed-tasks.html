@@ -1,1 +1,13 @@
-<p>list-completed-tasks works!</p>
+<div class="flex flex-col p-2 mb-1 space-y-0.5">
+  @for (task of completedTasks(); track task.id) {
+    <div
+      class="flex justify-between border border-gray-400 rounded bg-gray-200 drop-shadow-md p-4"
+    >
+      <span class="line-through">{{ task.title }}</span>
+      <div class="space-x-2">
+        <button (click)="toggle(task.id)" class="text-blue-600">↩</button>
+        <button (click)="delete(task.id)" class="text-red-600">✖</button>
+      </div>
+    </div>
+  }
+</div>

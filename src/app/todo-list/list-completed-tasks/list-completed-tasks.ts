@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, computed } from '@angular/core';
+import { TaskService } from '../../shared/services/tasks';
 
 @Component({
   selector: 'app-list-completed-tasks',
@@ -6,4 +7,15 @@ import { Component } from '@angular/core';
   templateUrl: './list-completed-tasks.html',
   styleUrl: './list-completed-tasks.scss',
 })
-export class ListCompletedTasks {}
+export class ListCompletedTasks {
+  completedTasks = computed(() => this._taskService.getCompletedTasks());
+  constructor(private readonly _taskService: TaskService) {}
+
+  toggle(id: number) {
+    this._taskService.toggleTask(id);
+  }
+
+  delete(id: number) {
+    this._taskService.deleteTask(id);
+  }
+}
