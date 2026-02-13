@@ -1,9 +1,13 @@
 import { Component, computed } from '@angular/core';
 import { TaskService } from '../../shared/services/tasks';
+import { taskAnimation } from '../../shared/utils/animations/task.animation';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-lists',
-  imports: [],
+  imports: [MatButtonModule, MatIconModule],
+  animations: [taskAnimation],
   templateUrl: './lists.html',
   styleUrl: './lists.scss',
 })

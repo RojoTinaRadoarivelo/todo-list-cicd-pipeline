@@ -1,12 +1,27 @@
 <div class="flex flex-col p-2 mb-1 space-y-0.5">
   @for (task of allTasks(); track task.id) {
     <div
-      class="flex justify-between border border-gray-400 rounded bg-amber-200 drop-shadow-md p-4"
+      @taskAnimation
+      class="flex justify-between items-center border border-gray-400 rounded bg-amber-100 drop-shadow-md hover:shadow-md transition-all duration-200 p-4"
     >
-      <span class="">{{ task.title }}</span>
+      <p class="">{{ task.title }}</p>
       <div class="space-x-2">
-        <button (click)="toggle(task.id)" class="text-blue-600">↩</button>
-        <button (click)="delete(task.id)" class="text-red-600">✖</button>
+        <button
+          mat-icon-button
+          (click)="toggle(task.id)"
+          aria-label="Check task"
+          class="text-info border-white border hover:bg-secondary-400 transition-colors duration-200 p-2"
+        >
+          <mat-icon class="text-success">check</mat-icon>
+        </button>
+        <button
+          mat-icon-button
+          (click)="delete(task.id)"
+          aria-label="Delete task"
+          class="text-error border-white border hover:bg-amber-500 transition-colors duration-200 p-2"
+        >
+          <mat-icon class="text-error">delete</mat-icon>
+        </button>
       </div>
     </div>
   }
