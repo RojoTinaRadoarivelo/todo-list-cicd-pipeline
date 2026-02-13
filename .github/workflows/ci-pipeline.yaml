@@ -59,8 +59,12 @@ jobs:
           if git log -1 --pretty=%B | grep -q "Auto format and fix according to rules."; then
             echo "Pulling latest changes for branch $BRANCH"
             git pull --rebase origin $BRANCH
+
+            # Configure remote URL to use token
+            git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}
+
             echo "Pushing commit to branch $BRANCH using token"
-            git push https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }} $BRANCH
+            git push origin $BRANCH
           else
             echo "No new commit to push."
           fi
