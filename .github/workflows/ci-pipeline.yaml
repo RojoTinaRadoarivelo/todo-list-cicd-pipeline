@@ -21,7 +21,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: 20
 
       - name: Install Dependencies
         run: npm install
@@ -52,13 +52,18 @@ jobs:
           git show -s --format=%B HEAD | npx commitlint --config commitlint.config.cjs
 
       - name: Pull latest changes and push if commit created
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           BRANCH=$(git rev-parse --abbrev-ref HEAD)
-          # Ne push que si le commit auto existe
           if git log -1 --pretty=%B | grep -q "Auto format and fix according to rules."; then
             echo "Pulling latest changes for branch $BRANCH"
             git pull --rebase origin $BRANCH
-            echo "Pushing commit to branch $BRANCH"
+
+            # Configure remote URL to use token
+            git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}
+
+            echo "Pushing commit to branch $BRANCH using token"
             git push origin $BRANCH
           else
             echo "No new commit to push."

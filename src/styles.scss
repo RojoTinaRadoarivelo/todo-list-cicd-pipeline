@@ -5,15 +5,19 @@
 // custom components at https://material.angular.dev/guide/theming
 /* You can add global styles to this file, and also import other style files */
 @use "./assets/styles/customs";
-@use '@angular/material' as mat;
+@use "@angular/material" as mat;
 
 html {
-  @include mat.theme((color: (primary: mat.$magenta-palette,
+  @include mat.theme(
+    (
+      color: (
+        primary: mat.$magenta-palette,
         tertiary: mat.$violet-palette,
       ),
       typography: Roboto,
       density: 0,
-    ));
+    )
+  );
 }
 
 body {
@@ -32,7 +36,6 @@ body {
   // Reset the user agent margin.
   margin: 0;
 }
-
 
 html,
 body {
