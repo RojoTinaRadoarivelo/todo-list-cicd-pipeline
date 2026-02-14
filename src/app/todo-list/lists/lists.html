@@ -2,7 +2,7 @@
   @for (task of allTasks(); track task.id) {
     <div
       @taskAnimation
-      class="flex justify-between items-center border border-gray-400 rounded bg-amber-100 drop-shadow-md hover:shadow-md transition-all duration-200 p-4"
+      class="flex justify-between items-center border border-gray-400 rounded bg-white drop-shadow-md hover:shadow-md transition-all duration-200 p-4"
     >
       <p class="">{{ task.title }}</p>
       <div class="space-x-2">
@@ -10,9 +10,9 @@
           mat-icon-button
           (click)="toggle(task.id)"
           aria-label="Check task"
-          class="text-info border-white border hover:bg-secondary-400 transition-colors duration-200 p-2"
+          class="text-success border-white border hover:bg-success hover:text-white transition-colors duration-200 p-2"
         >
-          <mat-icon class="text-success">check</mat-icon>
+          <mat-icon class="text-success hover:text-white">check</mat-icon>
         </button>
         <button
           mat-icon-button
